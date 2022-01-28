@@ -15,7 +15,7 @@ import { editTodoType } from "../../typescript/types";
 const Root: React.FC = () => {
 
   const [loading, setLoading] = useState<boolean>(true);
-  const todosArray: Todo[] = useSelector(getTodosSelector);
+  const todosArray = useSelector(getTodosSelector);
   const dispatch = useDispatch();
   const classes = useStyles();
 
