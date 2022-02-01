@@ -75,3 +75,12 @@ export const changeTodo: apiTypes.setChangeTodoType = async (data) => {
         console.log('edit-todo:', error);
     }
 }
+
+export const registrationApi: apiTypes.setRegistrationApi = async (data) => {
+    try {
+        const response = await fetch(`${BASE_URL}${ENDPOINTS.registration}`, postParams(data));
+        return response.json();
+    } catch(error: any) {
+        throw new Error(error);
+    }
+}

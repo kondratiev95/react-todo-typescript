@@ -1,5 +1,5 @@
 import * as actions from '../redux/actions'
-import { Todo } from './types';
+import { credentials, Todo } from './types';
 
 export type  setTodoRequestACType = () => { type: typeof actions.getTodoList.REQUEST, payload?: any};
 
@@ -53,4 +53,12 @@ export type editTodoSuccessACType = (payload: Todo) => ({
 export type editTodoFailedACType = (payload?: string) => ({ 
     type: typeof actions.editTodoItem.FAILED, payload?: string
 })
+
+
+export type credentialsRequestACType = (payload: credentials) => { type: typeof actions.sendCredentials.REQUEST, payload: credentials};
+
+export type credentialsSuccessACType = (payload: any) => { type: typeof actions.sendCredentials.SUCCESS, payload: any};
+
+export type credentialsFailedACType = (payload?: string) => { type: typeof actions.sendCredentials.FAILED, payload?: string};
+
 

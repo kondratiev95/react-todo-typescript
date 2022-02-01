@@ -1,6 +1,5 @@
 import * as actions from "../actions";
 import { actionType, appState, Todo } from "../../typescript/types";
-import { addItemSuccessAC } from "../actionsCreator";
 
 const initialState: appState  = {
     todos: [],

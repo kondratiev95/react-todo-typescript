@@ -25,19 +25,19 @@ export const getTodosFailedAC: typesAC.setTodoFailedACType  = payload => {
 
 export const addItemRequestAC: typesAC.addDataRequestACType = payload => {
     return {
-        type: actions.addTodoItem.REQUEST,
+        type: actions.addTodoItem.REQUEST,//ADD_ITEM_REQUEST
         payload
     };
 };
 export const addItemSuccessAC: typesAC.addDataSuccessACType = payload => {
     return {
-        type: actions.addTodoItem.SUCCESS,
+        type: actions.addTodoItem.SUCCESS,//ADD_ITEM_SUCCESS
         payload
     };
 };
 export const addItemFailedAC: typesAC.addDataFailedACType = payload => {
     return {
-        type: actions.addTodoItem.FAILED,
+        type: actions.addTodoItem.FAILED,//ADD_ITEM_FAILED
         payload
     }
 }
@@ -154,6 +154,26 @@ export const setCurrentTypeAC = (payload: string) => {
 }
 
 
+export const sendCredentialRequestAC: typesAC.credentialsRequestACType = payload => {
+    return {
+        type: actions.sendCredentials.REQUEST,
+        payload
+    }
+}
+
+export const sendCredentialSuccessAC: typesAC.credentialsSuccessACType = payload => {
+    return {
+        type: actions.sendCredentials.SUCCESS,
+        payload
+    }
+}
+
+export const sendCredentialFailedAC: typesAC.credentialsFailedACType = payload => {
+    return {
+        type: actions.sendCredentials.FAILED,
+        payload
+    }
+}
 
 
 

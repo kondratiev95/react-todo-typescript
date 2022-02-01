@@ -22,6 +22,10 @@ export type actionType = {
     payload: any
 }
 
+export type credentials = {
+    username: string,
+    password: any
+}
 
 
  
