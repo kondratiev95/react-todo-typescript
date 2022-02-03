@@ -1,7 +1,6 @@
 import * as actions from "./actions";
 import * as typesAC from '../typescript/actionCreatorType';
 
-
 export const getTodoRequestAC: typesAC.setTodoRequestACType = () => {
     return {
         type: actions.getTodoList.REQUEST,
@@ -20,7 +19,6 @@ export const getTodosFailedAC: typesAC.setTodoFailedACType  = payload => {
         payload
     };
 };
-
 
 
 export const addItemRequestAC: typesAC.addDataRequestACType = payload => {

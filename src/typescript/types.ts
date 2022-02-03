@@ -13,7 +13,7 @@ export type appState = {
     error: string
 }    
 
-export type setFilterTypeSelector = (state: appState) => appState;
+export type setFilterTypeSelector = (state: appState) => string;
 export type setTodosTypeSelector = (state: appState) => Todo[];
 export type setErrorTypeSelector = (state: appState) => string;
 
@@ -26,6 +26,8 @@ export type credentials = {
     username: string,
     password: any
 }
+
+
 
 
  

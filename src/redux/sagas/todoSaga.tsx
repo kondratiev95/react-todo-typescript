@@ -2,11 +2,9 @@ import { takeEvery, put, call } from "redux-saga/effects";
 import * as actionCreators from "../actionsCreator";
 import * as actions from "../actions";
 import * as api from "../../api/todoAPI";
-import { credentials, Todo } from "../../typescript/types";
-// const CryptoJS = require("crypto-js");
-import CryptoJS from 'crypto-js';
-const secretKey = 'dasdsadasdsd'
-const { SECRET_KEY } = process.env;
+import { Todo } from "../../typescript/types";
+ 
+
 
 function* getTodos() {
   try {
@@ -104,25 +102,8 @@ function* editTodo({
     yield put(actionCreators.editTodoFailedAC(e.message));
   }
 }
-
-function* sendCredentials({payload} : { payload: credentials, type: string}) {
-  try {
-    // console.log('payload', payload)
-    // payload.password = CryptoJS.AES.encrypt(payload.password, secretKey).toString();
-    // console.log('secretKey', SECRET_KEY)
-    // console.log('SECRET_PASSWORD', payload);
-    const res: string = yield call(api.registrationApi, payload);
-    if(res) {
-      yield put(actionCreators.sendCredentialSuccessAC(res));
-    } else {
-      throw new Error("Send credentials failed");
-    }
-  } catch(e: any) {
-    yield put(actionCreators.sendCredentialFailedAC(e.message));
-  }
-}
-function* watchLoadDataSaga() {
-  yield takeEvery(actions.sendCredentials.REQUEST, sendCredentials)
+ 
+export default function* watchLoadDataSaga() { 
   yield takeEvery(actions.getTodoList.REQUEST, getTodos);
   yield takeEvery(actions.addTodoItem.REQUEST, addTodo);
   yield takeEvery(actions.removeTodoItem.REQUEST, removeTodo);
@@ -130,8 +111,4 @@ function* watchLoadDataSaga() {
   yield takeEvery(actions.deleteCompletedTodo.REQUEST, removeCompleted);
   yield takeEvery(actions.handleAll.REQUEST, handleAllCompleted);
   yield takeEvery(actions.editTodoItem.REQUEST, editTodo);
-}
-
-export default function* rootSaga() {
-  yield watchLoadDataSaga();
 }

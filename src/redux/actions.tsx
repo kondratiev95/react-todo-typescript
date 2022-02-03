@@ -22,5 +22,7 @@ export const handleAll = createActions('TOGGLE_ALL');
 
 export const editTodoItem = createActions('EDIT_TODO');
 
-export const sendCredentials = createActions('SEND_CREDENTIALS')
+export const sendCredentials = createActions('SEND_CREDENTIALS');
+
+export const setCurrentActionType = 'SET_TYPE';
 

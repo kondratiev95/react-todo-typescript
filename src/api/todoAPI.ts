@@ -78,7 +78,7 @@ export const changeTodo: apiTypes.setChangeTodoType = async (data) => {
 
 export const registrationApi: apiTypes.setRegistrationApi = async (data) => {
     try {
-        const response = await fetch(`${BASE_URL}${ENDPOINTS.registration}`, postParams(data));
+        const response = await fetch(`${BASE_URL}${ENDPOINTS.signup}`, postParams(data));
         return response.json();
     } catch(error: any) {
         throw new Error(error);

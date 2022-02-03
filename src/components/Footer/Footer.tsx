@@ -72,7 +72,7 @@ const Footer: React.FC = () => {
       </div>
       {isTodoCompleted ? (
         <Button
-        size="small"
+          size="small"
           onClick={removeCompletedTodo}
           className={classes.clearCompleted}
           classes={{ label: classes.label, root: classes.root }}

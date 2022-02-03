@@ -13,4 +13,4 @@ export type setToggleItemType = (data: string) => Promise<Todo>;
 export type setToggleAllType = (data: boolean) => Promise<Todo[]>;
 export type setDelCompletedType = () => Promise<Todo[]>;
 export type setChangeTodoType = (data: { id: string, value: string}) => Promise<Todo>;
-export type setRegistrationApi = (data: credentials) => Promise<string>;
+export type setRegistrationApi = (data: credentials) => Promise<any>;
