@@ -25,15 +25,15 @@ import { makeStyles } from "@material-ui/styles";
     header: {
         marginTop: '60px',
         marginBottom: '20px',
-        fontSize: '70px',
+        fontSize: '60px',
         color: '#AE745C'
     },
     authBtn: {
-        background: '#AE745C',
+        backgroundColor: 'red',
         color: 'white',
-        width: '150px',
+        // width: '200px',
         '&:hover': {
-            background: '#FA8A59'
+            background: 'green'
         }
     },
     link: {
@@ -42,7 +42,13 @@ import { makeStyles } from "@material-ui/styles";
         color: 'brown',
         fontSize: '15px',
         borderBottom: '1px solid brown'
-    }
+    },
+    error: {
+        fontSize: '15px',
+        color: 'tomato',
+        marginBottom: '5px'
+    },
+
 
 
  }))

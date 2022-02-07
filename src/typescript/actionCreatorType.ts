@@ -62,3 +62,9 @@ export type credentialsSuccessACType = (payload: any) => { type: typeof actions.
 export type credentialsFailedACType = (payload?: string) => { type: typeof actions.sendCredentials.FAILED, payload?: string};
 
 
+
+export type sendLoginRequestACType = (payload: credentials) => { type: typeof actions.sendLoginValue.REQUEST, payload: credentials};
+
+export type sendLoginSuccessACType = (payload: any) => { type: typeof actions.sendLoginValue.SUCCESS, payload: any};
+
+export type sendLoginFailedACType = (payload?: any) => { type: typeof actions.sendLoginValue.FAILED, payload: any};

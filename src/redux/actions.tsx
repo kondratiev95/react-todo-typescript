@@ -24,5 +24,11 @@ export const editTodoItem = createActions('EDIT_TODO');
 
 export const sendCredentials = createActions('SEND_CREDENTIALS');
 
-export const setCurrentActionType = 'SET_TYPE';
+export const setCurrentActionType = createActions('SET_TYPE');
+
+export const sendLoginValue = createActions('SEND_LOGIN_VALUE');
+
+export const setDefaultIsRegistered = createActions('SET_DEFAULT_REGISTERED');
+
+
 

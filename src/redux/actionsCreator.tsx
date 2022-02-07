@@ -146,10 +146,18 @@ export const editTodoFailedAC: typesAC.editTodoFailedACType = payload => {
 
 export const setCurrentTypeAC = (payload: string) => {
     return {
-        type: 'SET_TYPE',
+        type: actions.setCurrentActionType.REQUEST,
         payload
     }
 }
+
+export const setDefaultRegistered = (payload?: boolean) => {
+    return {
+        type: actions.setDefaultIsRegistered.REQUEST,
+        payload
+    }
+}
+ 
 
 
 export const sendCredentialRequestAC: typesAC.credentialsRequestACType = payload => {
@@ -172,6 +180,30 @@ export const sendCredentialFailedAC: typesAC.credentialsFailedACType = payload =
         payload
     }
 }
+
+
+
+export const sendLoginValueRequestAC: typesAC.sendLoginRequestACType = payload => {
+    return {
+        type: actions.sendLoginValue.REQUEST,
+        payload
+    }
+}
+
+export const sendLoginValueSuccessAC: typesAC.sendLoginSuccessACType = payload => {
+    return {
+        type: actions.sendLoginValue.SUCCESS,
+        payload
+    }
+}
+
+export const sendLoginValueFailedAC: typesAC.sendLoginFailedACType = payload => {
+    return {
+        type: actions.sendLoginValue.FAILED,
+        payload
+    }
+}
+
 
 
 

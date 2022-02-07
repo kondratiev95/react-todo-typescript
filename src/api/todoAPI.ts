@@ -1,8 +1,6 @@
 import { BASE_URL, ENDPOINTS } from "./apiConstants";
 import * as apiTypes from '../typescript/apiTypes';
 
-
-
 const postParams: apiTypes.dataType = data => {
     return {
         method: 'POST',
@@ -73,14 +71,5 @@ export const changeTodo: apiTypes.setChangeTodoType = async (data) => {
         return response.json();
     } catch(error) {
         console.log('edit-todo:', error);
-    }
-}
-
-export const registrationApi: apiTypes.setRegistrationApi = async (data) => {
-    try {
-        const response = await fetch(`${BASE_URL}${ENDPOINTS.signup}`, postParams(data));
-        return response.json();
-    } catch(error: any) {
-        throw new Error(error);
     }
 }

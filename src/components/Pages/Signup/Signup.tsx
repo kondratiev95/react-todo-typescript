@@ -9,26 +9,32 @@ import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { SIGN_IN } from "../../../path";
 import { useNavigate } from "react-router";
+import { getIsRegistered, getSignUpError } from "../../../redux/selectors/selectors";
 
 
 const Signup: React.FC = () => {
     const [credentials, setCredentials] = useState<credentials>({ username: '', password: ''})
     const [checkPassword, setCheckPassword] = useState<string>('');
     const [error, setError] = useState<string>('');
+    const [isReg, setIsReg] = useState<any>(false);
     const [visible, setVisible] = useState<boolean>(false);
     const [show, setShow] = useState<boolean>(false);
     const dispatch = useDispatch();
-    // const isRegistered = useSelector((state: any) => state.authReducer.isRegistered);
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
+    const classes = useStyles();
+
+    const isRegistered = useSelector(getIsRegistered);
+
+    const signUpError = useSelector(getSignUpError);
 
     const confirmPassword = (e: any) => {
         setCheckPassword(e.target.value);
     }
 
-    const handleChange = (event: any) => setCredentials({ ...credentials, [event.target.name]: event.target.value });
+    const handleChange = (event: any) => setCredentials({ ...credentials, [event.target.name]: event.target.value.trim() });
 
     const signUp = useCallback(() => {
-        const res = dispatch(sendCredentialRequestAC(credentials)) 
+        const res = dispatch(sendCredentialRequestAC(credentials));
         console.log('res+++', res);
         
     }, [credentials, dispatch])
@@ -51,15 +57,17 @@ const Signup: React.FC = () => {
         }
     }
 
-    const classes = useStyles();
-
-    // useEffect(() => {
-    //     if(isRegistered) navigate(`${SIGN_IN}?kurwa`)
-    // }, [isRegistered])
+    useEffect(() => {
+        setIsReg(isRegistered);
+        if(isReg) {
+            navigate(SIGN_IN);
+        };
+    }, [isReg, navigate, isRegistered]);
 
     return (
         <div className={classes.signupBlock}>
             <h1 className={classes.header}>Sign up</h1>
+            <h4>{signUpError ? 'User has already registered' : null}</h4>
             <p className={classes.error}>{error}</p>
             <div>
                 <OutlinedInput
@@ -83,9 +91,9 @@ const Signup: React.FC = () => {
                     endAdornment={
                         <InputAdornment position="end">
                             <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={() => setShow(!show)}
-                            edge="end"
+                                aria-label="toggle password visibility"
+                                onClick={() => setShow(!show)}
+                                edge="end"
                             >
                             {show ? <Visibility /> : <VisibilityOff />}
                             </IconButton>

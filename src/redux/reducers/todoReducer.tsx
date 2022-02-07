@@ -9,7 +9,8 @@ const initialState: appState  = {
 
 export const todoReducer = (state = initialState, action: actionType) => {
     switch(action.type) {
-        case 'SET_TYPE':
+        case actions.setCurrentActionType.REQUEST:
+            console.log('ssadsadsaddasd',action.payload)
             return {
                 ...state,
                 type: action.payload as string

@@ -1,7 +1,25 @@
 import { appState, Todo } from "../../typescript/types";
 
-export const filterTypeSelector: (state: any) => string = state => state.todoReducer.type;
+interface TodoState {
+    todoReducer: appState
+}
 
-export const getTodosSelector: (state: any) => Todo[] = state => state.todoReducer.todos;
+interface AuthState {
+    authReducer: { 
+        isRegistered: boolean
+        error: string
+        accessToken: string
+    }
+}
 
-export const getErrorSelector: (state: any) => string = state => state.todoReducer.error;
+export const filterTypeSelector: (state: TodoState) => string = state => state.todoReducer.type;
+
+export const getTodosSelector: (state: TodoState) => Todo[] = state => state.todoReducer.todos;
+
+export const getErrorSelector: (state: TodoState) => string = state => state.todoReducer.error;
+
+export const getIsRegistered: (state: AuthState) => boolean = state => state.authReducer.isRegistered;
+
+export const getSignUpError: (state: AuthState) => string = state => state.authReducer.error;
+
+export const getAccessToken: (state: AuthState) => string = state => state.authReducer.accessToken;
