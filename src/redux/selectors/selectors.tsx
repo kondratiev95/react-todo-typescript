@@ -9,6 +9,7 @@ interface AuthState {
         isRegistered: boolean
         error: string
         accessToken: string
+        userName: string
     }
 }
 
@@ -23,3 +24,5 @@ export const getIsRegistered: (state: AuthState) => boolean = state => state.aut
 export const getSignUpError: (state: AuthState) => string = state => state.authReducer.error;
 
 export const getAccessToken: (state: AuthState) => string = state => state.authReducer.accessToken;
+
+export const getUserName: (state: AuthState) => string = state => state.authReducer.userName;

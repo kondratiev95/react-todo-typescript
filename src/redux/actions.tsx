@@ -30,5 +30,11 @@ export const sendLoginValue = createActions('SEND_LOGIN_VALUE');
 
 export const setDefaultIsRegistered = createActions('SET_DEFAULT_REGISTERED');
 
+export const logout = createActions('LOGOUT');
+
+export const setUsersDataTokens = createActions('SET_DATA_TOKENS');
+
+
+
 
 

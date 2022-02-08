@@ -1,10 +1,10 @@
 import { credentials, Todo } from "./types";
 
-export type dataType = (data: any) => {
+export type dataType = (data: any) => ({
     method: string,
     headers: { 'Content-type': string },
-    body: string
-}
+    body: string,
+});
 
 export type setGetDataType = () => Promise<Todo[]>;
 export type setAddDataType = (data: string) => Promise<Todo>;

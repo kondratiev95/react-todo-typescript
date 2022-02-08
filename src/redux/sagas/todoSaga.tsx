@@ -4,8 +4,6 @@ import * as actions from "../actions";
 import * as api from "../../api/todoAPI";
 import { Todo } from "../../typescript/types";
  
-
-
 function* getTodos() {
   try {
     const res: Todo[] = yield call(api.getData);

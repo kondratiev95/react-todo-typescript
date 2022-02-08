@@ -4,8 +4,9 @@ import { MAIN, SIGN_IN, SIGN_UP } from "../../../path";
 import Signin from "../Signin/Signin";
 import Signup from "../Signup/Signup";
 import Root from "../../Root/Root";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAccessToken } from "../../../redux/selectors/selectors";
+import { setUserDataTokensAC } from "../../../redux/actionsCreator";
 
 const Pages = () => {
 
@@ -13,20 +14,28 @@ const Pages = () => {
 
   const accessToken = useSelector(getAccessToken);
   console.log('accessToken+++', accessToken);
-  
+  const dispatch = useDispatch();
 
+  console.log('isUser', isUser);
+  
   useEffect(() => {
     if(!accessToken) { 
       setIsUser(false);
     } else {
       setIsUser(true)
     }
-
   }, [accessToken]);
 
   useEffect(() => {
-    const accessTokenLocal = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+    if(accessToken) { 
+     dispatch(setUserDataTokensAC({ accessToken, refreshToken }))
+    }
+  }, [ dispatch ])
 
+  useEffect(() => {
+    const accessTokenLocal = localStorage.getItem('accessToken');
     if (accessTokenLocal) {
       setIsUser(true)
     }

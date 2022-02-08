@@ -204,6 +204,19 @@ export const sendLoginValueFailedAC: typesAC.sendLoginFailedACType = payload => 
     }
 }
 
+export const logout = () => {
+    return {
+        type: actions.logout.REQUEST,
+    }
+}
+
+
+export const setUserDataTokensAC = (payload: any) => {
+    return {
+        type: actions.setUsersDataTokens.REQUEST,
+        payload
+    }
+}
 
 
 

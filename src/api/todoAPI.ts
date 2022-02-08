@@ -1,19 +1,26 @@
 import { BASE_URL, ENDPOINTS } from "./apiConstants";
 import * as apiTypes from '../typescript/apiTypes';
+import { getAccessToken } from "../utils/utils";
 
 const postParams: apiTypes.dataType = data => {
+    const accessToken = getAccessToken();
     return {
         method: 'POST',
         headers: {
             'Content-type': 'text/plain',
+            'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify(data)
     }
 }
 
 export const getData: apiTypes.setGetDataType = async () => {
+    const accessToken = getAccessToken();
     try {
-        const response = await fetch(BASE_URL);
+        const response = await fetch(BASE_URL, { headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
+        }, method: 'GET'});
         return response.json();
     } catch(error) {
         throw new Error('Something went wrong');

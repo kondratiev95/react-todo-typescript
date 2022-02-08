@@ -9,6 +9,7 @@ const postParams: apiTypes.dataType = data => {
         },
         body: JSON.stringify(data)
     }
+     
 }
 
 export const registrationApi: apiTypes.setRegistrationApi = async (data) => {
@@ -23,6 +24,8 @@ export const registrationApi: apiTypes.setRegistrationApi = async (data) => {
 export const sendLoginApiValue: apiTypes.setLoginApiType = async (data) => {
     try {
         const response = await fetch(`${BASE_URL}${ENDPOINTS.signin}`, postParams(data));
+        console.log(response);
+        
         return response.json();
     } catch (error: any) {
         throw new Error(error);

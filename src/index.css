@@ -8,4 +8,28 @@
 body {
   background-color: rgb(247, 239, 232);
 }
-
+h1 {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 60px;
+  font-style: italic;
+  font-weight: 200;
+  color: rgb(255, 174, 197);
+  text-shadow: 3px 3px 4px rgb(168, 109, 147);
+  margin-bottom: 10px;
+}
+.logout {
+  display: block;
+  width: 100px;
+  font-size: 18px;
+  padding: 7px;
+  border: none;
+  background-color: rgb(210, 119, 233);
+  color: white;
+  margin: 0px auto;
+}
+.logout:hover {
+  background-color: rgb(208, 69, 243);
+  transition: all 0.7s ease-in;
+  box-shadow: 2px 2px 8px rgb(148, 107, 167);
+}

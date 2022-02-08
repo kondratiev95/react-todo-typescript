@@ -5,19 +5,24 @@ import { getTodosSelector } from "../../redux/selectors/selectors";
 import TodoForm from "../Header/TodoForm";
 import ListItem from "../Main/ListItem";
 import Footer from "../Footer/Footer";
-import { editTodoRequestAC, getTodoRequestAC, toggleAllRequestAC } from "../../redux/actionsCreator";
+import { useNavigate } from "react-router";
+import { editTodoRequestAC, getTodoRequestAC, logout as logoutAction, toggleAllRequestAC } from "../../redux/actionsCreator";
 
 import useStyles from "./styles.js";
 import Preloader from "../Preloader/Preloader";
 import { Todo } from "../../typescript/types";
 import { editTodoType } from "../../typescript/types";
+import { MAIN, SIGN_IN } from "../../path";
 
 const Root: React.FC = () => {
 
   const [loading, setLoading] = useState<boolean>(true);
   const todosArray = useSelector(getTodosSelector);
+  // const userName = useSelector(getUserName)
+  const userName = localStorage.getItem('username')
   const dispatch = useDispatch();
   const classes = useStyles();
+  const navigate = useNavigate();
 
 
   const isAllCompleted: boolean = useMemo(
@@ -36,6 +41,12 @@ const Root: React.FC = () => {
     [dispatch]
   );
 
+  const logout = () => {
+    localStorage.clear();
+    dispatch(logoutAction());
+    navigate(SIGN_IN);
+  }
+
   useEffect(() => {
     dispatch(getTodoRequestAC());
     setLoading(false);
@@ -47,7 +58,9 @@ const Root: React.FC = () => {
 
   return (
     <div>
-      <h1 className={classes.todoHeader}>todos</h1>
+      <h1>{`Hello ${userName}`}</h1>
+      <button className="logout" onClick={logout}>logout</button>
+      <h2 className={classes.todoHeader}>todos</h2>
       <div className={classes.todoContainer}>
         <TodoForm
           handleAllCompleted={handleAllCompleted}
