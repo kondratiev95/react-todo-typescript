@@ -7,12 +7,24 @@ import { Todo } from "../../typescript/types";
 function* getTodos() {
   try {
     const res: Todo[] = yield call(api.getData);
-    if (res) {
-      yield put(actionCreators.getTodoSuccessAC(res));
+
+    //@ts-ignore
+    if (res.status === 401) {
+      console.log('aaaaaaaaaaaaaaaaaaaaaaa');
+      yield put(actionCreators.refreshRequestAC())
+
+      
     } else {
-      throw new Error("Could not get data");
+      yield put(actionCreators.getTodoSuccessAC(res));
     }
+    // if (res) {
+    //   yield put(actionCreators.getTodoSuccessAC(res));
+    // } else {
+    //   console.log(res)
+    //   throw new Error("Could not get data");
+    // }
   } catch (e: any) {
+    console.log('sdasdasdadsdads', e);
     yield put(actionCreators.getTodosFailedAC(e.message));
   }
 }

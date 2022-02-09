@@ -204,11 +204,23 @@ export const sendLoginValueFailedAC: typesAC.sendLoginFailedACType = payload => 
     }
 }
 
+
+
+
+
+
+
 export const logout = () => {
     return {
         type: actions.logout.REQUEST,
     }
 }
+
+
+
+
+
+
 
 
 export const setUserDataTokensAC = (payload: any) => {
@@ -219,5 +231,27 @@ export const setUserDataTokensAC = (payload: any) => {
 }
 
 
+
+
+
+export const refreshRequestAC: typesAC.setRefreshRequestType = () => {
+    return {
+        type: actions.refreshActions.REQUEST
+    }
+}
+
+export const refreshSuccessAC: typesAC.setRefreshSuccessType = payload => {
+    return {
+        type: actions.refreshActions.SUCCESS,
+        payload
+    }
+}
+
+export const refreshFailedAC: typesAC.setRefreshFailedType = payload => {
+    return {
+        type: actions.refreshActions.FAILED,
+        payload
+    }
+}
 
 

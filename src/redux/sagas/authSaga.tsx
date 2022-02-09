@@ -35,20 +35,46 @@ function* sendLogin({payload} : { payload: credentials, type: string}) {
       username: payload.username,
       password: encryptedPass,
     });
+     
+    console.log('SAGAA', res);
     if(res) {
-      console.log(res);
       setUserData(res);
+      console.log('SAGAA', res);
       yield put(actionCreators.sendLoginValueSuccessAC(res));
     } else {
       throw new Error("Send login data failed");
     }
   } catch(e: any) {
+    console.log("SAGAAAAAAAAAAAAAAaa", e)
     yield put(actionCreators.sendLoginValueFailedAC(e.message));
+  }
+}
+
+export function* refreshSaga() {
+   
+  try {
+    const userData = {
+      accessToken: localStorage.getItem('accessToken'),
+      refreshToken: localStorage.getItem('refreshToken'),
+      username: localStorage.getItem('username')
+    }
+    //@ts-ignore
+    const res: any = yield call(api.refreshApi, userData);
+    console.log('RESSSSSSSSSSSSSSSS', res)
+    if(res) {
+      setUserData(res);
+      yield put(actionCreators.refreshSuccessAC(res));
+    } else {
+      throw new Error("Send login data failed");
+    }
+  } catch(e: any) {
+    yield put(actionCreators.refreshFailedAC(e.message));
   }
 }
 
 
 export default function* watchAuthSaga() {
+  yield takeEvery(actions.refreshActions.REQUEST, refreshSaga)
   yield takeEvery(actions.sendCredentials.REQUEST, sendCredentials);
   yield takeEvery(actions.sendLoginValue.REQUEST, sendLogin);
 }

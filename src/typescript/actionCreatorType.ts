@@ -68,3 +68,16 @@ export type sendLoginRequestACType = (payload: credentials) => { type: typeof ac
 export type sendLoginSuccessACType = (payload: any) => { type: typeof actions.sendLoginValue.SUCCESS, payload: any};
 
 export type sendLoginFailedACType = (payload?: any) => { type: typeof actions.sendLoginValue.FAILED, payload: any};
+
+
+export type setRefreshRequestType = () => ({
+    type: typeof actions.refreshActions.REQUEST,
+});
+export type setRefreshSuccessType = (payload: any) => ({
+    type: typeof actions.refreshActions.SUCCESS,
+    payload: any
+});
+export type setRefreshFailedType = (payload?: any) => ({
+    type: typeof actions.refreshActions.FAILED,
+    payload: any
+});

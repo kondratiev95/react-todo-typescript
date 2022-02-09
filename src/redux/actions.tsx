@@ -34,6 +34,8 @@ export const logout = createActions('LOGOUT');
 
 export const setUsersDataTokens = createActions('SET_DATA_TOKENS');
 
+export const refreshActions = createActions('REFRESH');
+
 
 
 

@@ -7,13 +7,15 @@ const postParams: apiTypes.dataType = data => {
     return {
         method: 'POST',
         headers: {
-            'Content-type': 'text/plain',
+            // 'Content-type': 'text/plain',
+            "Content-type": "application/json",
             'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify(data)
     }
 }
 
+//@ts-ignore
 export const getData: apiTypes.setGetDataType = async () => {
     const accessToken = getAccessToken();
     try {
@@ -21,8 +23,16 @@ export const getData: apiTypes.setGetDataType = async () => {
             'Content-type': 'application/json',
             'Authorization': `Bearer ${accessToken}`
         }, method: 'GET'});
-        return response.json();
+        console.log('response', response);
+
+        if (response.status >= 200 && response.status < 400) {
+            return response.json()
+        } else {
+            return response
+        }
     } catch(error) {
+        console.log('QQQQERRRRRR',error);
+        
         throw new Error('Something went wrong');
     }
 }
