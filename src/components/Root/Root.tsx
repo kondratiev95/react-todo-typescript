@@ -1,7 +1,7 @@
 import { useEffect, useCallback, useMemo, useState } from "react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTodosSelector } from "../../redux/selectors/selectors";
+import { getAccessToken, getTodosSelector } from "../../redux/selectors/selectors";
 import TodoForm from "../Header/TodoForm";
 import ListItem from "../Main/ListItem";
 import Footer from "../Footer/Footer";
@@ -20,6 +20,7 @@ const Root: React.FC = () => {
   const todosArray = useSelector(getTodosSelector);
   // const userName = useSelector(getUserName)
   const userName = localStorage.getItem('username')
+  const accessToken = useSelector(getAccessToken);
   const dispatch = useDispatch();
   const classes = useStyles();
   const navigate = useNavigate();
@@ -48,9 +49,18 @@ const Root: React.FC = () => {
   }
 
   useEffect(() => {
-    dispatch(getTodoRequestAC());
-    setLoading(false);
-  }, [dispatch]);
+    if (accessToken) {
+      dispatch(getTodoRequestAC());
+      setLoading(false);
+    }
+     
+  }, [dispatch, accessToken]);
+
+  // useEffect(() => {
+  //   if(!accessToken) {
+  //     navigate(SIGN_IN);
+  //   }
+  // }, [accessToken, navigate])
 
   if (loading) {
     return <Preloader />;

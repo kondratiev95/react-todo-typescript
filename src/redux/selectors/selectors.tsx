@@ -10,6 +10,8 @@ interface AuthState {
         error: string
         accessToken: string
         userName: string
+        compareTokensErrro: string
+        refreshToken: string
     }
 }
 
@@ -23,6 +25,10 @@ export const getIsRegistered: (state: AuthState) => boolean = state => state.aut
 
 export const getSignUpError: (state: AuthState) => string = state => state.authReducer.error;
 
+export const getRefreshToken: (state: AuthState) => string = state => state.authReducer.refreshToken;
+
 export const getAccessToken: (state: AuthState) => string = state => state.authReducer.accessToken;
 
 export const getUserName: (state: AuthState) => string = state => state.authReducer.userName;
+
+export const getCompareError: (state: AuthState) => string = state => state.authReducer.compareTokensErrro;

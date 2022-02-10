@@ -1,9 +1,11 @@
-import { takeEvery, put, call } from "redux-saga/effects";
+import { takeEvery, put, call, select } from "redux-saga/effects";
 import * as actionCreators from "../actionsCreator";
 import * as actions from "../actions";
 import * as api from "../../api/authApi";
 import { credentials } from "../../typescript/types";
 import CryptoJS from 'crypto-js';
+import { getAccessToken, getRefreshToken } from "../selectors/selectors";
+
 
 const setUserData = (userData: any) => {
     localStorage.setItem('username', userData.username);
@@ -51,16 +53,16 @@ function* sendLogin({payload} : { payload: credentials, type: string}) {
 }
 
 export function* refreshSaga() {
-   
+  
   try {
+    const accessToken: string = yield select(getAccessToken);
+    const refreshToken: string = yield select(getRefreshToken)
+    
     const userData = {
-      accessToken: localStorage.getItem('accessToken'),
-      refreshToken: localStorage.getItem('refreshToken'),
-      username: localStorage.getItem('username')
+      accessToken: accessToken,
+      refreshToken: refreshToken
     }
-    //@ts-ignore
-    const res: any = yield call(api.refreshApi, userData);
-    console.log('RESSSSSSSSSSSSSSSS', res)
+    const res:{username: string, tokens: {accessToken: string, refreshToken: string}} = yield call(api.refreshApi, userData);
     if(res) {
       setUserData(res);
       yield put(actionCreators.refreshSuccessAC(res));
@@ -68,6 +70,8 @@ export function* refreshSaga() {
       throw new Error("Send login data failed");
     }
   } catch(e: any) {
+    localStorage.clear();
+    yield put(actionCreators.logout());
     yield put(actionCreators.refreshFailedAC(e.message));
   }
 }

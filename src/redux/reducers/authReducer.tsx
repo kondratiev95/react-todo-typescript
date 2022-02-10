@@ -7,6 +7,7 @@ const initialState = {
   accessToken: null,
   refreshToken: null,
   userName: null,
+  compareTokensError: null
 };
 
 export const authReducer = (state = initialState, action: actionType) => {
@@ -65,7 +66,11 @@ export const authReducer = (state = initialState, action: actionType) => {
         refreshToken: action.payload.tokens.refreshToken,
         userName: action.payload.username,
       }
-
+    case actions.refreshActions.FAILED: 
+      return {
+        ...state,
+        compareTokensError: action.payload
+      }
 
   }
 

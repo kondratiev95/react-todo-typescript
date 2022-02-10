@@ -6,14 +6,11 @@ import { Todo } from "../../typescript/types";
  
 function* getTodos() {
   try {
-    const res: Todo[] = yield call(api.getData);
-
+    const res: Todo[]  = yield call(api.getData);
     //@ts-ignore
     if (res.status === 401) {
       console.log('aaaaaaaaaaaaaaaaaaaaaaa');
-      yield put(actionCreators.refreshRequestAC())
-
-      
+      yield put(actionCreators.refreshRequestAC());
     } else {
       yield put(actionCreators.getTodoSuccessAC(res));
     }
@@ -28,14 +25,16 @@ function* getTodos() {
     yield put(actionCreators.getTodosFailedAC(e.message));
   }
 }
-
+ 
 function* addTodo({ payload }: {payload: string, type: string}) {
   try {
     const res: Todo = yield call(api.addData, payload);
-    if (res) {
-      yield put(actionCreators.addItemSuccessAC(res));
+    //@ts-ignore
+    if (res.status === 401) {
+      console.log('aaaaaaaaaaaaaaaaaaaaaaa');
+      yield put(actionCreators.refreshRequestAC())
     } else {
-      throw new Error("Could not get data");
+      yield put(actionCreators.addItemSuccessAC(res));
     }
   } catch (e: any) {
     console.log("HELLO++++", e);
@@ -46,10 +45,13 @@ function* addTodo({ payload }: {payload: string, type: string}) {
 function* removeTodo({ payload }: { payload: string; type: string }) {
   try {
     const res: string = yield call(api.deleteItem, payload);
-    if (res) {
-      yield put(actionCreators.removeItemSuccessAC(res));
+    
+    //@ts-ignore
+    if (res.status === 401) {
+      console.log('aaaaaaaaaaaaaaaaaaaaaaa');
+      yield put(actionCreators.refreshRequestAC())
     } else {
-      throw new Error("Could not get data");
+      yield put(actionCreators.removeItemSuccessAC(res));
     }
   } catch (e: any) {
     yield put(actionCreators.removeItemFailedAC(e.message));
@@ -59,10 +61,12 @@ function* removeTodo({ payload }: { payload: string; type: string }) {
 function* checkboxHandler({ payload }: { payload: string; type: string }) {
   try {
     const res: Todo = yield call(api.toggleItem, payload);
-    if (res) {
-      yield put(actionCreators.checkboxSuccessAC(res));
+    //@ts-ignore
+    if (res.status === 401) {
+      console.log('aaaaaaaaaaaaaaaaaaaaaaa');
+      yield put(actionCreators.refreshRequestAC())
     } else {
-      throw new Error("Could not get data");
+      yield put(actionCreators.checkboxSuccessAC(res));
     }
   } catch (e: any) {
     yield put(actionCreators.checkboxFailedAC(e.message));
@@ -72,10 +76,12 @@ function* checkboxHandler({ payload }: { payload: string; type: string }) {
 function* removeCompleted() {
   try {
     const res: Todo[] = yield call(api.deleteCompleted);
-    if (res) {
-      yield put(actionCreators.deleteCompletedSuccessAC(res));
+    //@ts-ignore
+    if (res.status === 401) {
+      console.log('aaaaaaaaaaaaaaaaaaaaaaa');
+      yield put(actionCreators.refreshRequestAC())
     } else {
-      throw new Error("Could not get data");
+      yield put(actionCreators.deleteCompletedSuccessAC(res));
     }
   } catch (e: any) {
     yield put(actionCreators.deleteCompletedFailedAC(e.message));
@@ -85,10 +91,12 @@ function* removeCompleted() {
 function* handleAllCompleted({ payload }: { payload: boolean; type: string }) {
   try {
     const res: Todo[] = yield call(api.toggleAll, payload);
-    if (res) {
-      yield put(actionCreators.toggleAllSuccessAC(res));
+    //@ts-ignore
+    if (res.status === 401) {
+      console.log('aaaaaaaaaaaaaaaaaaaaaaa');
+      yield put(actionCreators.refreshRequestAC())
     } else {
-      throw new Error("Could not get data");
+      yield put(actionCreators.toggleAllSuccessAC(res));;
     }
   } catch (e: any) {
     yield put(actionCreators.toggleAllFailedAC(e.message));
@@ -103,10 +111,12 @@ function* editTodo({
 }) {
   try {
     const res: Todo = yield call(api.changeTodo, payload);
-    if (res) {
-      yield put(actionCreators.editTodoSuccessAC(res));
+    //@ts-ignore
+    if (res.status === 401) {
+      console.log('aaaaaaaaaaaaaaaaaaaaaaa');
+      yield put(actionCreators.refreshRequestAC())
     } else {
-      throw new Error("Could not get data");
+      yield put(actionCreators.editTodoSuccessAC(res));;
     }
   } catch (e: any) {
     yield put(actionCreators.editTodoFailedAC(e.message));

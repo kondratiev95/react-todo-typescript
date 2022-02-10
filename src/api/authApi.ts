@@ -4,10 +4,6 @@ import * as apiTypes from '../typescript/apiTypes';
 const postParams: apiTypes.dataType = data => {
     return {
         method: 'POST',
-        // headers: {
-        //     // 'Content-type': 'text/plain',
-        //     "Content-type": "application/json",
-        // },
         headers: {
             'Content-Type': 'text/plain',
         },
@@ -27,9 +23,7 @@ export const registrationApi: apiTypes.setRegistrationApi = async (data) => {
 
 export const sendLoginApiValue: apiTypes.setLoginApiType = async (data) => {
     try {
-        const response = await fetch(`${BASE_URL}${ENDPOINTS.signin}`, postParams(data));
-        // console.log(response);
-        
+        const response = await fetch(`${BASE_URL}${ENDPOINTS.signin}`, postParams(data));        
         return response.json();
     } catch (error: any) {
         console.log('err', error);
