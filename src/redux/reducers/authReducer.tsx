@@ -11,8 +11,8 @@ const initialState = {
 };
 
 export const authReducer = (state = initialState, action: actionType) => {
+  
   switch (action.type) {
-
 
     case actions.sendCredentials.SUCCESS:
       return {
@@ -20,13 +20,11 @@ export const authReducer = (state = initialState, action: actionType) => {
         isRegistered: action.payload as boolean,
       };
 
-
     case actions.sendCredentials.FAILED:
       return {
         ...state,
         error: action.payload,
       };
-
 
     case actions.setDefaultIsRegistered.REQUEST:
       return {
@@ -34,9 +32,7 @@ export const authReducer = (state = initialState, action: actionType) => {
         isRegistered: false,
       };
 
-
     case actions.sendLoginValue.SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         accessToken: action.payload.tokens.accessToken,
@@ -44,12 +40,10 @@ export const authReducer = (state = initialState, action: actionType) => {
         userName: action.payload.username,
       };
 
-
     case actions.logout.REQUEST:
       return {
         ...initialState,
       };
-
 
     case actions.setUsersDataTokens.REQUEST: 
       return {
@@ -58,7 +52,6 @@ export const authReducer = (state = initialState, action: actionType) => {
         refreshToken: action.payload.refreshToken,  
       }
 
-
     case actions.refreshActions.SUCCESS:
       return {
         ...state,
@@ -66,6 +59,7 @@ export const authReducer = (state = initialState, action: actionType) => {
         refreshToken: action.payload.tokens.refreshToken,
         userName: action.payload.username,
       }
+
     case actions.refreshActions.FAILED: 
       return {
         ...state,

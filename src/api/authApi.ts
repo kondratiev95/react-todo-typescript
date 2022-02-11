@@ -26,8 +26,6 @@ export const sendLoginApiValue: apiTypes.setLoginApiType = async (data) => {
         const response = await fetch(`${BASE_URL}${ENDPOINTS.signin}`, postParams(data));        
         return response.json();
     } catch (error: any) {
-        console.log('err', error);
-        
         throw new Error(error);
     }
 }

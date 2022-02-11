@@ -2,14 +2,14 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
 import useStyles from "./styles";
 import { useDispatch, useSelector } from "react-redux";
-import { credentials } from "../../../typescript/types";
-import { sendCredentialRequestAC } from "../../../redux/actionsCreator";
+import { credentials } from "../../typescript/types";
+import { sendCredentialRequestAC } from "../../redux/actionsCreator";
 import { IconButton, OutlinedInput, InputAdornment } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import { SIGN_IN } from "../../../path";
+import { SIGN_IN } from "../../path";
 import { useNavigate } from "react-router";
-import { getIsRegistered, getSignUpError } from "../../../redux/selectors/selectors";
+import { getIsRegistered, getSignUpError } from "../../redux/selectors/selectors";
 
 
 const Signup: React.FC = () => {
@@ -34,9 +34,7 @@ const Signup: React.FC = () => {
     const handleChange = (event: any) => setCredentials({ ...credentials, [event.target.name]: event.target.value.trim() });
 
     const signUp = useCallback(() => {
-        const res = dispatch(sendCredentialRequestAC(credentials));
-        console.log('res+++', res);
-        
+        dispatch(sendCredentialRequestAC(credentials));  
     }, [credentials, dispatch])
 
     const handleSubmit = () => {

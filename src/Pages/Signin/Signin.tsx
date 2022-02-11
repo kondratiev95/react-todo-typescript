@@ -5,64 +5,55 @@ import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { OutlinedInput, InputAdornment, IconButton } from "@material-ui/core";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
-import { MAIN, SIGN_UP } from "../../../path";
+import { MAIN, SIGN_UP } from "../../path";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { sendLoginValueRequestAC, setDefaultRegistered } from "../../../redux/actionsCreator";
-import { getAccessToken } from "../../../redux/selectors/selectors";
+import { sendLoginValueRequestAC, setDefaultRegistered } from "../../redux/actionsCreator";
+import { getAccessToken } from "../../redux/selectors/selectors";
 
 
 const Signin: React.FC = () => {
 
     const [signInValue, setSignInValue] = useState<any>({ username: '', password: ''})
-    const [error, setError] = useState<string>('');
-    const [visible, setVisible] = useState<boolean>(false);
-    const accessToken = useSelector(getAccessToken);
+    const [error, setError] = useState<string>('')
+    const [visible, setVisible] = useState<boolean>(false)
+    const classes = useStyles()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const accessToken = useSelector(getAccessToken)
 
     const handleInputs = (e: any) => {
-        setSignInValue({ ...signInValue, [e.target.name]: e.target.value});
-    }
-    console.log(signInValue)
-    const classes = useStyles();
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
+        setSignInValue({ ...signInValue, [e.target.name]: e.target.value})
+    } 
 
     const handleSubmit = () => {
         if(signInValue.username.trim().length === 0) {
-            setError('Field username cant be empty');
+            setError('Field username cant be empty')
         } else if(signInValue.username.trim().length < 3) {
-            setError('Username shoul be more 3 symbols');
+            setError('Username shoul be more 3 symbols')
         } else if(/(?=.*\d)(?=.*[a-z])/i.test(signInValue.password) === false) {
             setError('Password must contain letters and numbers');
         } else if(signInValue.password.length < 5) {
             setError("Password cant be less 5 symbols")
         } else {
-            setError('');
-            console.log('Успех', signInValue.password);
-            signIn();
+            setError('')
+            signIn()
         }
     }
 
     const signIn = useCallback(() => {
-        const res = dispatch(sendLoginValueRequestAC(signInValue))
-        console.log('LOGIN DISPATCH', res);
-
-    }, [dispatch, signInValue]);
+        dispatch(sendLoginValueRequestAC(signInValue))
+    }, [dispatch, signInValue])
 
     useEffect(() => {
         dispatch(setDefaultRegistered())
-    }, [dispatch]);
-
-
+    }, [dispatch])
     
     useEffect(() => {
         if(accessToken) {
-            navigate(MAIN);
+            navigate(MAIN)
         } 
     }, [accessToken, navigate])
-
-
 
     return (
         <div className={classes.authBlock}>

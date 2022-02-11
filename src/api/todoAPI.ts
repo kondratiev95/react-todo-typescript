@@ -14,24 +14,19 @@ const postParams: apiTypes.dataType = data => {
     }
 }
 
-//@ts-ignore
 export const getData: apiTypes.setGetDataType = async () => {
     const accessToken = getAccessToken();
     try {
         const response = await fetch(BASE_URL, { headers: {
             'Content-type': 'application/json',
             'Authorization': `Bearer ${accessToken}`
-        }, method: 'GET'});
-        console.log('response', response);
-
+        }, method: 'GET'})
         if (response.status >= 200 && response.status < 400) {
             return response.json()
         } else {
-            return response
+            return response.status
         }
     } catch(error) {
-        console.log('QQQQERRRRRR',error);
-        
         throw new Error('Something went wrong');
     }
 }
@@ -42,7 +37,7 @@ export const addData: apiTypes.setAddDataType = async (data) => {
         if (response.status >= 200 && response.status < 400) {
             return response.json()
         } else {
-            return response
+            return response.status
         }
     } catch(error) {
         console.log('add-data:', error);
@@ -50,32 +45,28 @@ export const addData: apiTypes.setAddDataType = async (data) => {
 } 
 
 export const deleteItem: apiTypes.setDeleteItemType = async (data) => {
-    console.log('DATA77777777777777', data);
-    
     try {
-        const response = await fetch(`${BASE_URL }${ENDPOINTS.removeItem}`, postParams(data));
-        // console.log('response++++REMOVE', response);
-        
+        const response = await fetch(`${BASE_URL }${ENDPOINTS.removeItem}`, postParams(data))
         if (response.status >= 200 && response.status < 400) {
             return response.json()
         } else {
-            return response
+            return response.status
         }
     } catch(error) {
-        console.log('delete-item:', error);
+        console.log('delete-item:', error)
     }
 }
 
 export const toggleItem: apiTypes.setToggleItemType  = async (data) => {
     try {
-        const response = await fetch(`${BASE_URL }${ENDPOINTS.toggleItem}`, postParams(data));
+        const response = await fetch(`${BASE_URL }${ENDPOINTS.toggleItem}`, postParams(data))
         if (response.status >= 200 && response.status < 400) {
             return response.json()
         } else {
-            return response
+            return response.status
         }
     } catch(error) {
-        console.log('toggle-item:', error);
+        console.log('toggle-item:', error)
     }
 }
 
@@ -85,7 +76,7 @@ export const toggleAll: apiTypes.setToggleAllType = async (data) => {
         if (response.status >= 200 && response.status < 400) {
             return response.json()
         } else {
-            return response
+            return response.status
         }
     } catch(error) {
         console.log('toggle-all:', error);
@@ -94,14 +85,14 @@ export const toggleAll: apiTypes.setToggleAllType = async (data) => {
 
 export const deleteCompleted: apiTypes.setDelCompletedType = async () => {
     try {
-        const response = await fetch(`${BASE_URL}${ENDPOINTS.deleteCompleted}`, postParams(null));
+        const response = await fetch(`${BASE_URL}${ENDPOINTS.deleteCompleted}`, postParams(null))
         if (response.status >= 200 && response.status < 400) {
             return response.json()
         } else {
-            return response
+            return response.status
         }
     } catch(error) {
-        console.log('delete-completed:', error);
+        console.log('delete-completed:', error)
     }
 }
 
@@ -111,7 +102,7 @@ export const changeTodo: apiTypes.setChangeTodoType = async (data) => {
         if (response.status >= 200 && response.status < 400) {
             return response.json()
         } else {
-            return response
+            return response.status
         }
     } catch(error) {
         console.log('edit-todo:', error);

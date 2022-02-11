@@ -24,8 +24,28 @@ export type actionType = {
 
 export type credentials = {
     username: string,
-    password: any
+    password: string
 }
+
+export type responseAuthDataType = {
+    username: string,
+    tokens : {
+        accessToken: string,
+        refreshToken: string
+    }
+}
+
+export type tokensTypes = {
+    accessToken: string,
+    refreshToken: string
+}
+
+export type editDataType = {
+    payload: { id: string; value: string };
+    type: string;
+}
+
+
 
 
 

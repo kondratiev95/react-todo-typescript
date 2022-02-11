@@ -12,18 +12,17 @@ import useStyles from "./styles.js";
 import Preloader from "../Preloader/Preloader";
 import { Todo } from "../../typescript/types";
 import { editTodoType } from "../../typescript/types";
-import { MAIN, SIGN_IN } from "../../path";
+import { SIGN_IN } from "../../path";
 
 const Root: React.FC = () => {
 
-  const [loading, setLoading] = useState<boolean>(true);
-  const todosArray = useSelector(getTodosSelector);
-  // const userName = useSelector(getUserName)
+  const [loading, setLoading] = useState<boolean>(true)
+  const todosArray = useSelector(getTodosSelector)
   const userName = localStorage.getItem('username')
-  const accessToken = useSelector(getAccessToken);
-  const dispatch = useDispatch();
-  const classes = useStyles();
-  const navigate = useNavigate();
+  const accessToken = useSelector(getAccessToken)
+  const dispatch = useDispatch()
+  const classes = useStyles()
+  const navigate = useNavigate()
 
 
   const isAllCompleted: boolean = useMemo(
@@ -32,35 +31,29 @@ const Root: React.FC = () => {
   );
 
   const handleAllCompleted = useCallback(() => {
-    dispatch(toggleAllRequestAC(isAllCompleted));
-  }, [isAllCompleted, dispatch]);
+    dispatch(toggleAllRequestAC(isAllCompleted))
+  }, [isAllCompleted, dispatch])
 
   const editTodo: editTodoType = useCallback(
     (id, value) => {
-      dispatch(editTodoRequestAC({ id, value }));
+      dispatch(editTodoRequestAC({ id, value }))
     },
     [dispatch]
   );
 
   const logout = () => {
-    localStorage.clear();
-    dispatch(logoutAction());
-    navigate(SIGN_IN);
+    localStorage.clear()
+    dispatch(logoutAction())
+    navigate(SIGN_IN)
   }
 
   useEffect(() => {
     if (accessToken) {
-      dispatch(getTodoRequestAC());
+      dispatch(getTodoRequestAC())
       setLoading(false);
     }
      
-  }, [dispatch, accessToken]);
-
-  // useEffect(() => {
-  //   if(!accessToken) {
-  //     navigate(SIGN_IN);
-  //   }
-  // }, [accessToken, navigate])
+  }, [dispatch, accessToken])
 
   if (loading) {
     return <Preloader />;

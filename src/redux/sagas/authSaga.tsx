@@ -2,10 +2,9 @@ import { takeEvery, put, call, select } from "redux-saga/effects";
 import * as actionCreators from "../actionsCreator";
 import * as actions from "../actions";
 import * as api from "../../api/authApi";
-import { credentials } from "../../typescript/types";
+import { credentials, responseAuthDataType } from "../../typescript/types";
 import CryptoJS from 'crypto-js';
 import { getAccessToken, getRefreshToken } from "../selectors/selectors";
-
 
 const setUserData = (userData: any) => {
     localStorage.setItem('username', userData.username);
@@ -33,27 +32,22 @@ function* sendCredentials({payload} : { payload: credentials, type: string}) {
 function* sendLogin({payload} : { payload: credentials, type: string}) {
   try {
     const encryptedPass = CryptoJS.AES.encrypt(payload.password, process.env.REACT_APP_SECRET_KEY as string).toString();
-    const res: string = yield call(api.sendLoginApiValue, {
+    const res: responseAuthDataType = yield call(api.sendLoginApiValue, {
       username: payload.username,
       password: encryptedPass,
-    });
-     
-    console.log('SAGAA', res);
+    })
     if(res) {
-      setUserData(res);
-      console.log('SAGAA', res);
+      setUserData(res)
       yield put(actionCreators.sendLoginValueSuccessAC(res));
     } else {
       throw new Error("Send login data failed");
     }
   } catch(e: any) {
-    console.log("SAGAAAAAAAAAAAAAAaa", e)
     yield put(actionCreators.sendLoginValueFailedAC(e.message));
   }
 }
 
 export function* refreshSaga() {
-  
   try {
     const accessToken: string = yield select(getAccessToken);
     const refreshToken: string = yield select(getRefreshToken)
@@ -62,7 +56,8 @@ export function* refreshSaga() {
       accessToken: accessToken,
       refreshToken: refreshToken
     }
-    const res:{username: string, tokens: {accessToken: string, refreshToken: string}} = yield call(api.refreshApi, userData);
+
+    const res: responseAuthDataType = yield call(api.refreshApi, userData);
     if(res) {
       setUserData(res);
       yield put(actionCreators.refreshSuccessAC(res));
@@ -75,7 +70,6 @@ export function* refreshSaga() {
     yield put(actionCreators.refreshFailedAC(e.message));
   }
 }
-
 
 export default function* watchAuthSaga() {
   yield takeEvery(actions.refreshActions.REQUEST, refreshSaga)

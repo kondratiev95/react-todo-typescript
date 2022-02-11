@@ -1,22 +1,17 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { MAIN, SIGN_IN, SIGN_UP } from "../../../path";
+import { MAIN, SIGN_IN, SIGN_UP } from "../../path";
 import Signin from "../Signin/Signin";
 import Signup from "../Signup/Signup";
-import Root from "../../Root/Root";
+import Root from "../../components/Root/Root";
 import { useDispatch, useSelector } from "react-redux";
-import { getAccessToken } from "../../../redux/selectors/selectors";
-import { setUserDataTokensAC } from "../../../redux/actionsCreator";
+import { getAccessToken } from "../../redux/selectors/selectors";
+import { setUserDataTokensAC } from "../../redux/actionsCreator";
 
 const Pages = () => {
-
   const [isUser, setIsUser] = useState<boolean>(true);
-
-  const accessToken = useSelector(getAccessToken);
-  console.log('accessToken+++', accessToken);
-  const dispatch = useDispatch();
-
-  console.log('isUser', isUser);
+  const accessToken = useSelector(getAccessToken)
+  const dispatch = useDispatch()
   
   useEffect(() => {
     if(!accessToken) { 
@@ -41,10 +36,8 @@ const Pages = () => {
     }
   }, [])
 
-  console.log(isUser);
-
+  
   return (
-
     <BrowserRouter>
     {!isUser ? (
       <Routes>

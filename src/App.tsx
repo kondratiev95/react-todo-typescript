@@ -1,5 +1,5 @@
 import React from "react";
-import Pages from './components/Pages/Root/index'
+import Pages from './Pages/Root/index'
  
 export const App: React.FC = () => {
   return (

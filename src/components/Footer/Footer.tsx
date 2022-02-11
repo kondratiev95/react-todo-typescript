@@ -17,11 +17,9 @@ const Footer: React.FC = () => {
   const dispatch = useDispatch();
 
   const filterType = useCallback((e) => {
-    console.log('EEEEEEEEE', e)
-    const currentType = e.target.innerText;
-    console.log("CUREENT TYPE", currentType);
-    dispatch(setCurrentTypeAC(currentType));
-  },[dispatch]);
+    const currentType = e.target.innerText
+    dispatch(setCurrentTypeAC(currentType))
+  },[dispatch])
 
   const removeCompletedTodo = useCallback(() => {
     dispatch(deleteCompletedRequestAC());
@@ -39,8 +37,7 @@ const Footer: React.FC = () => {
     if (isTodoCompleted !== isCompletedItem) {
       setIsTodoCompleted(isCompletedItem);
     }
-  }, [todos, isTodoCompleted]);
-  console.log('sadsddsada', type)
+  }, [todos, isTodoCompleted])
 
   return (
     <div className={classes.todoFooter}>
@@ -55,7 +52,6 @@ const Footer: React.FC = () => {
           all
         </Button>
         <Button
-          // value="active"
           data-my-data="active"
           onClick={filterType}
           size="small" 

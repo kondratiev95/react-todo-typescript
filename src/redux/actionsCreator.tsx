@@ -4,7 +4,6 @@ import * as typesAC from '../typescript/actionCreatorType';
 export const getTodoRequestAC: typesAC.setTodoRequestACType = () => {
     return {
         type: actions.getTodoList.REQUEST,
-        payload: null
     };
 };
 export const getTodoSuccessAC: typesAC.setTodoSuccessACType = payload => {
@@ -23,19 +22,19 @@ export const getTodosFailedAC: typesAC.setTodoFailedACType  = payload => {
 
 export const addItemRequestAC: typesAC.addDataRequestACType = payload => {
     return {
-        type: actions.addTodoItem.REQUEST,//ADD_ITEM_REQUEST
+        type: actions.addTodoItem.REQUEST,
         payload
     };
 };
 export const addItemSuccessAC: typesAC.addDataSuccessACType = payload => {
     return {
-        type: actions.addTodoItem.SUCCESS,//ADD_ITEM_SUCCESS
+        type: actions.addTodoItem.SUCCESS,
         payload
     };
 };
 export const addItemFailedAC: typesAC.addDataFailedACType = payload => {
     return {
-        type: actions.addTodoItem.FAILED,//ADD_ITEM_FAILED
+        type: actions.addTodoItem.FAILED,
         payload
     }
 }
@@ -87,7 +86,6 @@ export const checkboxFailedAC: typesAC.checkboxFailedACType = payload => {
 export const deleteCompletedRequestAC: typesAC.deleteCompletedRequestACType = () => {
     return {
         type: actions.deleteCompletedTodo.REQUEST,
-        payload: null
     }
 }
 export const deleteCompletedSuccessAC: typesAC.deleteCompletedSuccessACType= payload => {
@@ -205,11 +203,6 @@ export const sendLoginValueFailedAC: typesAC.sendLoginFailedACType = payload => 
 }
 
 
-
-
-
-
-
 export const logout = () => {
     return {
         type: actions.logout.REQUEST,
@@ -217,21 +210,12 @@ export const logout = () => {
 }
 
 
-
-
-
-
-
-
-export const setUserDataTokensAC = (payload: any) => {
+export const setUserDataTokensAC = (payload: { accessToken: string, refreshToken: string | null}) => {
     return {
         type: actions.setUsersDataTokens.REQUEST,
         payload
     }
 }
-
-
-
 
 
 export const refreshRequestAC: typesAC.setRefreshRequestType = () => {
